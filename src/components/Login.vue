@@ -33,24 +33,22 @@
 
 <script>
   import auth from '@/firebase/auth';
-  
-  export default {
-    data() {
-      return {
-        email: '',
-        password: '',
-      };
+
+export default {
+  // ...
+
+  methods: {
+    async login() {
+      try {
+        await auth.signInWithEmailAndPassword(this.email, this.password);
+        alert('Login successful!');
+        this.$router.push({ name: 'Home' }); // Redirect to the Home route
+      } catch (error) {
+        console.error('Error logging in:', error);
+      }
     },
-    methods: {
-      async login() {
-        try {
-          await auth.signInWithEmailAndPassword(this.email, this.password);
-          alert('Login successful!');
-        } catch (error) {
-          console.error('Error logging in:', error);
-        }
-      },
-    },
-  };
-  </script>
+  },
+};
+
+</script>
   
