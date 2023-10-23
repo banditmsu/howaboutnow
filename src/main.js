@@ -17,7 +17,7 @@ new Vue({
 
 const opts = {
   theme: {
-    dark: false
+    dark: true
   },
   options: {
     customProperties: true

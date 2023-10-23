@@ -1,58 +1,64 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col cols="12" sm="8" md="6">
-        <v-card>
-          <v-card-title class="headline">
-            Tell ME YOUR GOALZ
-          </v-card-title>
-          <v-card-text>
-              <!-- Title input field -->
-              <v-text-field
-                v-model="title"
-                label="Title"
-                outlined
-                required
-              ></v-text-field>
+  <v-container class="align-center justify-center">
+    <v-layout>
+      <v-flex lg12>
+        <v-row class="my-custom-row d-flex align-center justify-center">
+          <v-col cols="12" lg="10">
+            <v-card>
+              <v-card-title class="headline">
+                Tell ME YOUR GOALZ
+              </v-card-title>
+              <v-card-text>
+                <!-- Title input field -->
+                <v-text-field
+                  v-model="title"
+                  label="Title"
+                  outlined
+                  required
+                ></v-text-field>
 
-              <!-- Description input field -->
-              <v-text-field
-                v-model="description"
-                label="Description"
-                outlined
-                required
-              ></v-text-field>
+                <!-- Description input field -->
+                <v-text-field
+                  v-model="description"
+                  label="Description"
+                  outlined
+                  required
+                ></v-text-field>
 
-            <!-- Add Button -->
-            <v-btn @click="addDataToFirestore" color="primary">Add Data to Firestore</v-btn>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row justify="center" class="my-custom-row">
-    <v-col cols="12" sm="8" md="6" class="my-custom-col">
-      <v-card class="my-custom-card">
-        <v-card-title class="headline my-custom-title">
-          Goalz List
-        </v-card-title>
-        <v-card-text class="my-custom-card-text">
-          <!-- Display a list of documents -->
-          <v-list dense>
-            <v-list-item
-              v-for="(document, index) in documents"
-              :key="index"
-              class="my-custom-list-item"
-            >
-              <v-list-item-title class="my-custom-list-title">{{ document.title }}</v-list-item-title>
-              <v-list-item-subtitle class="my-custom-list-subtitle">{{ document.description }}</v-list-item-subtitle>
-            </v-list-item>
-          </v-list>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </v-row>
+                <!-- Add Button -->
+                <v-btn @click="addDataToFirestore" color="secondary">Add a Goal</v-btn>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+        <v-row class="my-custom-row d-flex align-center justify-center">
+          <v-col cols="12" lg="10" class="my-custom-col">
+            <v-card class="my-custom-card">
+              <v-card-title class="headline my-custom-title">
+                Goalz List
+              </v-card-title>
+              <v-card-text class="my-custom-card-text">
+                <!-- Display a list of documents -->
+                <v-list dense>
+                  <v-list-item
+                    v-for="(document, index) in documents"
+                    :key="index"
+                    class="my-custom-list-item"
+                  >
+                    <v-list-item-title class="my-custom-list-title">{{ document.title }}</v-list-item-title>
+                    <v-list-item-subtitle class="my-custom-list-subtitle">{{ document.description }}</v-list-item-subtitle>
+                  </v-list-item>
+                </v-list>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
+
+
 
 <script>
 import firestore from '../firebase/firebaseConfig'; // Import the Firestore instance
@@ -160,5 +166,8 @@ export default {
 .my-custom-list-subtitle {
   font-size: 18px;
   color: #333;
+}
+.center-container {
+  align-items: center;
 }
 </style>
