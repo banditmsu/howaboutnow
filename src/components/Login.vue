@@ -33,6 +33,7 @@
 
 <script>
   import auth from '@/firebase/auth';
+  import $router from '@/router';
 
 export default {
   // ...
