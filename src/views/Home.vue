@@ -4,7 +4,7 @@
       <v-col cols="12" sm="8" md="6">
         <v-card>
           <v-card-title class="headline">
-            Welcome to Your Vue Firebase App
+            Tell ME YOUR GOALZ
           </v-card-title>
           <v-card-text>
               <!-- Title input field -->
@@ -29,27 +29,28 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row justify="center">
-      <v-col cols="12" sm="8" md="6">
-        <v-card>
-          <v-card-title class="headline">
-            Document List
-          </v-card-title>
-          <v-card-text>
-            <!-- Display a list of documents -->
-            <v-list dense>
-              <v-list-item
-                v-for="(document, index) in documents"
-                :key="index"
-              >
-                <v-list-item-title>{{ document.title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ document.description }}</v-list-item-subtitle>
-              </v-list-item>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
+    <v-row justify="center" class="my-custom-row">
+    <v-col cols="12" sm="8" md="6" class="my-custom-col">
+      <v-card class="my-custom-card">
+        <v-card-title class="headline my-custom-title">
+          Goalz List
+        </v-card-title>
+        <v-card-text class="my-custom-card-text">
+          <!-- Display a list of documents -->
+          <v-list dense>
+            <v-list-item
+              v-for="(document, index) in documents"
+              :key="index"
+              class="my-custom-list-item"
+            >
+              <v-list-item-title class="my-custom-list-title">{{ document.title }}</v-list-item-title>
+              <v-list-item-subtitle class="my-custom-list-subtitle">{{ document.description }}</v-list-item-subtitle>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+      </v-card>
+    </v-col>
+  </v-row>
   </v-container>
 </template>
 
@@ -112,3 +113,52 @@ export default {
   },
 };
 </script>
+<style scoped>
+/* Apply styles to the v-row */
+.my-custom-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Apply styles to the v-col */
+.my-custom-col {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Apply styles to the v-card */
+.my-custom-card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Apply styles to the v-card-title */
+.my-custom-title {
+  font-size: 24px;
+  color: #333;
+}
+
+/* Apply styles to the v-card-text */
+.my-custom-card-text {
+  padding: 20px;
+}
+
+/* Apply styles to the v-list-item */
+.my-custom-list-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+/* Apply styles to the v-list-item-title and v-list-item-subtitle */
+.my-custom-list-title,
+.my-custom-list-subtitle {
+  font-size: 18px;
+  color: #333;
+}
+</style>
