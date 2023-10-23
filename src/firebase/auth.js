@@ -1,6 +1,6 @@
 // src/firebase/auth.js
-import firebase from './firebaseConfig';
+import firestore from './firebaseConfig';
 
-const auth = firebase.auth();
+const auth = firestore.app.auth();
 
 export default auth;

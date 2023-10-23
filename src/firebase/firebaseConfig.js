@@ -28,5 +28,7 @@ async function getCities(db) {
   const cityList = citySnapshot.docs.map(doc => doc.data());
   return cityList;
 }
+// Initialize Firestore
+const firestore = app.firestore();
 
-export default app;
+export default firestore;
