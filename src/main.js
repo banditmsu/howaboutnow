@@ -1,19 +1,19 @@
-
+// src/main.js
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
 import store from './store';
-import Vue from "vue";
-import App from "./App.vue";
-import router from "@/router";
-import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css"; // Add this line
+import Vuetify from 'vuetify';
 
-Vue.config.productionTip = false;
 Vue.use(Vuetify);
 
 new Vue({
+  render: (h) => h(App),
   router,
   store,
-  render: h => h(App)
-}).$mount("#app");
+  Vuetify,
+}).$mount('#app');
 
 const opts = {
   theme: {
@@ -28,4 +28,3 @@ const opts = {
 };
 
 export default new Vuetify(opts);
-
