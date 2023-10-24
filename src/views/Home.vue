@@ -67,31 +67,21 @@
             Goalz List
           </v-card-title>
           <v-card-text class="my-custom-card-text">
-            
-
-            <v-card class="my-custom-card">
-              <v-card-title class="headline my-custom-title">
-                Goalz List
-              </v-card-title>
-              <v-card-text class="my-custom-card-text">
-                <!-- Display a list of documents -->
-                <v-list>
-                  <v-list-item
-                    v-for="(document, index) in documents"
-                    :key="index"
-                    class="my-custom-list-item"
-                  >
-                    <v-list-item-title class="my-custom-list-title">{{ document.title }}</v-list-item-title>
-                    <v-list-item-subtitle class="my-custom-list-subtitle">{{ document.description }}</v-list-item-subtitle>
-                    <v-list-item-subtitle>Overall % Complete: {{ document.overallProgress }}</v-list-item-subtitle>
-                    <v-list-item-subtitle>Actions taken this month: {{ document.actionsTaken }}</v-list-item-subtitle>
-                    <v-list-item-subtitle> Actions planned next month: {{ document.actionsPlanned }}</v-list-item-subtitle>
-                    <v-list-item-subtitle>Obstacles/Roadblocks: {{ document.obstacles }}</v-list-item-subtitle>
-                    <v-list-item-subtitle>Specific help needed: {{ document.helpNeeded }}</v-list-item-subtitle>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-            </v-card>
+            <v-list>
+              <v-list-item
+                v-for="(document, index) in documents"
+                :key="index"
+                class="my-custom-list-item"
+              >
+                <v-list-item-title class="my-custom-list-title">{{ document.title }}</v-list-item-title>
+                <v-list-item class="my-custom-list-subtitle">{{ document.description }}</v-list-item>
+                <v-list-item>Overall % Complete: {{ document.overallProgress }}</v-list-item>
+                <v-list-item>Actions taken this month: {{ document.actionsTaken }}</v-list-item>
+                <v-list-item>Actions planned next month: {{ document.actionsPlanned }}</v-list-item>
+                <v-list-item>Obstacles/Roadblocks: {{ document.obstacles }}</v-list-item>
+                <v-list-item>Specific help needed: {{ document.helpNeeded }}</v-list-item>
+              </v-list-item>
+            </v-list>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -251,6 +241,116 @@ export default {
 .v-btn--contained.v-btn--round:hover {
   background-color: #1976D2; /* Darker shade of blue on hover */
 }
+
+<style scoped>
+.my-custom-row {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.my-custom-col {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  border-radius: 5px;
+  transition: transform 0.3s; /* Add a transition effect for hovering */
+}
+
+.my-custom-col:hover {
+  transform: scale(1.05); /* Scale up on hover for a pop effect */
+}
+
+.my-custom-card {
+  background-color: #2196F3; /* Blue color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.my-custom-title {
+  font-size: 24px;
+  color: #fff; /* White color for text */
+}
+
+.my-custom-card-text {
+  padding: 20px;
+}
+
+.my-custom-list-item {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+}
+
+.my-custom-list-title,
+.my-custom-list-subtitle {
+  font-size: 18px;
+  color: #333;
+}
+
+/* Style the form fields with blue color */
+.v-text-field--outlined .v-input__control {
+  background-color: #fff;
+}
+
+.v-text-field--outlined .v-label {
+  color: #2196F3;
+}
+
+.v-text-field--outlined .v-input__icon--prepend, .v-text-field--outlined .v-input__icon--append {
+  color: #2196F3;
+}
+
+.v-text-field--outlined .v-input__control--text-field {
+  border: 2px solid #2196F3;
+  border-radius: 5px;
+  transition: box-shadow 0.3s; /* Add a box-shadow transition */
+}
+
+.v-text-field--outlined .v-input__control--text-field::before, .v-text-field--outlined .v-input__control--text-field::after {
+  border-color: #2196F3;
+}
+
+.v-text-field--outlined .v-input__control--text-field:focus {
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5); /* Highlight on focus */
+}
+
+/* Style the button */
+.v-btn--contained.v-btn--round {
+  background-color: #2196F3;
+  color: #fff;
+  border-radius: 30px;
+  text-transform: none;
+}
+
+.v-btn--contained.v-btn--round:hover {
+  background-color: #1976D2; /* Darker shade of blue on hover */
+}
+
+/* Increase the font size for the list titles */
+.my-custom-list-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Adjust the font size and spacing for list subtitles */
+.my-custom-list-subtitle {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Use a dark text color for readability */
+.my-custom-list-item {
+  color: #333;
+}
+
+/* Add spacing between list items for better readability */
+.my-custom-list-item {
+  margin: 20px 0;
+}
 </style>
+
 
 
