@@ -61,27 +61,82 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex xs12 sm6 md6> <!-- Adjust the column width based on your layout preferences -->
+      <v-flex xs12 sm6 md6>
         <v-card class="my-custom-card">
           <v-card-title class="headline my-custom-title">
             Goalz List
+            <svg v-if="!editMode" @click="toggleEditMode" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+              <path d="M0 0h24v24H0V0z" fill="none"/>
+              <path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/>
+            </svg>
           </v-card-title>
           <v-card-text class="my-custom-card-text">
+            <!-- Your list of documents here -->
             <v-list>
               <v-list-item
                 v-for="(document, index) in documents"
                 :key="index"
                 class="my-custom-list-item"
               >
-                <v-list-item-title class="my-custom-list-title">{{ document.title }}</v-list-item-title>
-                <v-list-item class="my-custom-list-subtitle">{{ document.description }}</v-list-item>
-                <v-list-item>Overall % Complete: {{ document.overallProgress }}</v-list-item>
-                <v-list-item>Actions taken this month: {{ document.actionsTaken }}</v-list-item>
-                <v-list-item>Actions planned next month: {{ document.actionsPlanned }}</v-list-item>
-                <v-list-item>Obstacles/Roadblocks: {{ document.obstacles }}</v-list-item>
-                <v-list-item>Specific help needed: {{ document.helpNeeded }}</v-list-item>
+                <v-list-item-title class="my-custom-list-title">
+                  <template v-if="editMode">
+                    <v-text-field
+                      outlined
+                      v-model="document.title"
+                    ></v-text-field>
+                  </template>
+                  <template v-else>
+                    {{ document.title }}
+                  </template>
+                </v-list-item-title>
+                <v-list-item-subtitle class="my-custom-list-subtitle">
+                  <template v-if="editMode">
+                    <v-text-field
+                      outlined
+                      v-model="document.description"
+                    ></v-text-field>
+                  </template>
+                  <template v-else>
+                    {{ document.description }}
+                  </template>
+                </v-list-item-subtitle>
+                <v-list-item-subtitle class="my-custom-list-subtitle">
+                  <template v-if="editMode">
+                    <v-text-field
+                      outlined
+                      v-model="document.overallProgress"
+                    ></v-text-field>
+                  </template>
+                  <template v-else>
+                    {{ document.overallProgress }}
+                  </template>
+                </v-list-item-subtitle>
+                <v-list-item-subtitle class="my-custom-list-subtitle">
+                  <template v-if="editMode">
+                    <v-text-field
+                      outlined
+                      v-model="document.actionsTaken"
+                    ></v-text-field>
+                  </template>
+                  <template v-else>
+                    {{ document.actionsTaken }}
+                  </template>
+                </v-list-item-subtitle>
+                <v-list-item-subtitle class="my-custom-list-subtitle">
+                  <template v-if="editMode">
+                    <v-text-field
+                      outlined
+                      v-model="document.actionsPlanned"
+                    ></v-text-field>
+                  </template>
+                  <template v-else>
+                    {{ document.actionsPlanned }}
+                  </template>
+                </v-list-item-subtitle>
+                <!-- Add more editable fields here -->
               </v-list-item>
             </v-list>
+            <v-btn v-if="editMode" @click="saveChanges">Save</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -104,6 +159,7 @@ export default {
       actionsPlanned: '', // New field for Actions planned next month
       obstacles: '', // New field for Obstacles/Roadblocks
       helpNeeded: '', // New field for Specific help needed
+      editMode: false, // Set to true when editing a document
     };
   },
   created() {
@@ -161,6 +217,56 @@ export default {
           });
       }
     },
+    saveChanges() {
+    const batch = firestore.batch(); // Create a batch for multiple updates
+
+    this.documents.forEach((document) => {
+      // Reference to the Firestore document
+      const docRef = firestore.collection('Documents').doc(document.id);
+
+      // Create an object with updated fields
+      const updatedData = {};
+
+      if (document.title !== undefined) {
+        updatedData.title = document.title;
+      }
+
+      if (document.description !== undefined) {
+        updatedData.description = document.description;
+      }
+
+      if (document.overallProgress !== undefined) {
+        updatedData.overallProgress = document.overallProgress;
+      }
+
+      if (document.actionsTaken !== undefined) {
+        updatedData.actionsTaken = document.actionsTaken;
+      }
+
+      if (document.actionsPlanned !== undefined) {
+        updatedData.actionsPlanned = document.actionsPlanned;
+      }
+
+      // Add other fields as needed
+
+      batch.update(docRef, updatedData); // Queue the update in the batch
+    });
+
+    // Commit the batch to update all documents at once
+    batch.commit()
+      .then(() => {
+        this.editMode = false; // Exit edit mode
+        console.log('Changes saved successfully');
+      })
+      .catch((error) => {
+        console.error('Error saving changes:', error);
+      });
+  },
+    toggleEditMode() {
+      this.editMode = !this.editMode;
+    },
+
+    // Add methods to update individual fields as needed
   },
 };
 </script>
@@ -193,8 +299,8 @@ export default {
 }
 
 .my-custom-title {
-  font-size: 24px;
-  color: #fff; /* White color for text */
+  font-size: 20px;
+  color: #000; /* White color for text */
 }
 
 .my-custom-card-text {
@@ -213,6 +319,8 @@ export default {
 .my-custom-list-subtitle {
   font-size: 18px;
   color: #333;
+  padding-right: 20px;
+  height: 100px;
 }
 
 /* Style the form fields with blue color */
@@ -248,8 +356,6 @@ export default {
 .v-btn--contained.v-btn--round:hover {
   background-color: #1976D2; /* Darker shade of blue on hover */
 }
-
-<style scoped>
 .my-custom-row {
   background-color: #f5f5f5;
   padding: 20px;
@@ -274,11 +380,6 @@ export default {
   border-radius: 5px;
 }
 
-.my-custom-title {
-  font-size: 24px;
-  color: #fff; /* White color for text */
-}
-
 .my-custom-card-text {
   padding: 20px;
 }
@@ -293,7 +394,7 @@ export default {
 
 .my-custom-list-title,
 .my-custom-list-subtitle {
-  font-size: 18px;
+  font-size: 12px;
   color: #333;
 }
 
@@ -338,13 +439,13 @@ export default {
 
 /* Increase the font size for the list titles */
 .my-custom-list-title {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 /* Adjust the font size and spacing for list subtitles */
 .my-custom-list-subtitle {
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
