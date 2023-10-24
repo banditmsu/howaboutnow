@@ -185,6 +185,13 @@ export default {
   border-radius: 5px;
 }
 
+.my-custom-card {
+  margin-top: 20px; /* Add margin to the top of the card */
+  margin-left: 20px; /* Add margin to the left of the card */
+  margin-right: 20px; /* Add margin to the right of the card */
+  margin-bottom: 20px; /* Add margin to the bottom of the card */
+}
+
 .my-custom-title {
   font-size: 24px;
   color: #fff; /* White color for text */
