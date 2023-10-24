@@ -164,20 +164,7 @@ export default {
   },
   created() {
     // Fetch documents from Firestore collection (replace 'your-collection-name')
-    firestore.collection('Documents').get()
-      .then((querySnapshot) => {
-        const documents = [];
-        querySnapshot.forEach((doc) => {
-          documents.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-        this.documents = documents;
-      })
-      .catch((error) => {
-        console.error('Error fetching documents:', error);
-      });
+    this.fetchDocuments();
   },
   methods: {
     addDataToFirestore() {
@@ -211,10 +198,13 @@ export default {
             this.actionsPlanned = '';
             this.obstacles = '';
             this.helpNeeded = '';
+                // After adding data, refresh the document list
+             this.fetchDocuments();
           })
           .catch((error) => {
             console.error('Error adding data to Firestore:', error);
           });
+          
       }
     },
     saveChanges() {
@@ -264,6 +254,22 @@ export default {
   },
     toggleEditMode() {
       this.editMode = !this.editMode;
+    },
+
+    async fetchDocuments() {
+      try {
+        const querySnapshot = await firestore.collection('Documents').get();
+        const documents = [];
+        querySnapshot.forEach((doc) => {
+          documents.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        this.documents = documents;
+      } catch (error) {
+        console.error('Error fetching documents:', error);
+      }
     },
 
     // Add methods to update individual fields as needed
