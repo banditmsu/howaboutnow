@@ -3,7 +3,7 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md6>
         <v-card elevation="10"> <!-- Apply elevation for a pop effect -->
-          <v-card-title class="headline primary">
+          <v-card-title class="headline">
             Login
           </v-card-title>
           <v-card-text>

@@ -93,6 +93,9 @@
       </v-flex>
       <v-btn @click="toggleView">Toggle View</v-btn>
     </v-layout>
+    <v-snackbar v-model="snackbar" :timeout="3000" color="success">
+      Changes saved
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -115,14 +118,15 @@ export default {
       helpNeeded: '', // New field for Specific help needed
       editMode: false, // Set to true when editing a document
       addingGoal: true, // Set to true when adding a document
+      snackbar: false, // Initialize snackbar as hidden
       tableHeaders: [
-      { text: 'Title', value: 'title' },
-      { text: 'Description', value: 'description' },
-      { text: 'Overall Progress', value: 'overallProgress' },
-      { text: 'Actions Taken', value: 'actionsTaken' },
-      { text: 'Actions Planned', value: 'actionsPlanned' },
-      // Add more headers as needed
-    ],
+        { text: 'Title', value: 'title' },
+        { text: 'Description', value: 'description' },
+        { text: 'Overall Progress', value: 'overallProgress' },
+        { text: 'Actions Taken', value: 'actionsTaken' },
+        { text: 'Actions Planned', value: 'actionsPlanned' },
+        // Add more headers as needed
+      ],
     };
   },
   created() {
@@ -161,13 +165,13 @@ export default {
             this.actionsPlanned = '';
             this.obstacles = '';
             this.helpNeeded = '';
-                // After adding data, refresh the document list
-             this.fetchDocuments();
+            // After adding data, refresh the document list
+            this.fetchDocuments();
           })
           .catch((error) => {
             console.error('Error adding data to Firestore:', error);
           });
-          
+
       }
     },
     saveChanges() {
@@ -177,6 +181,14 @@ export default {
         // Replace the following with your specific update logic
         this.updateDocument(document);
       }
+
+      // Show the snackbar
+      this.snackbar = true;
+
+      // Hide the snackbar after a timeout (e.g., 3 seconds)
+      setTimeout(() => {
+        this.snackbar = false;
+      }, 3000);
 
       // Exit edit mode after saving changes
       this.editMode = false;
@@ -240,21 +252,27 @@ export default {
 }
 
 .my-custom-card {
-  background-color: #2196F3; /* Blue color */
+  background-color: #2196F3;
+  /* Blue color */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
 
 .my-custom-card {
-  margin-top: 20px; /* Add margin to the top of the card */
-  margin-left: 20px; /* Add margin to the left of the card */
-  margin-right: 20px; /* Add margin to the right of the card */
-  margin-bottom: 20px; /* Add margin to the bottom of the card */
+  margin-top: 20px;
+  /* Add margin to the top of the card */
+  margin-left: 20px;
+  /* Add margin to the left of the card */
+  margin-right: 20px;
+  /* Add margin to the right of the card */
+  margin-bottom: 20px;
+  /* Add margin to the bottom of the card */
 }
 
 .my-custom-title {
   font-size: 20px;
-  color: #000; /* White color for text */
+  color: #000;
+  /* White color for text */
 }
 
 .my-custom-card-text {
@@ -286,7 +304,8 @@ export default {
   color: #2196F3;
 }
 
-.v-text-field--outlined .v-input__icon--prepend, .v-text-field--outlined .v-input__icon--append {
+.v-text-field--outlined .v-input__icon--prepend,
+.v-text-field--outlined .v-input__icon--append {
   color: #2196F3;
 }
 
@@ -295,7 +314,8 @@ export default {
   border-radius: 5px;
 }
 
-.v-text-field--outlined .v-input__control--text-field::before, .v-text-field--outlined .v-input__control--text-field::after {
+.v-text-field--outlined .v-input__control--text-field::before,
+.v-text-field--outlined .v-input__control--text-field::after {
   border-color: #2196F3;
 }
 
@@ -308,7 +328,8 @@ export default {
 }
 
 .v-btn.v-btn--contained.v-btn--round:hover {
-  background-color: #1976D2; /* Darker shade of blue on hover */
+  background-color: #1976D2;
+  /* Darker shade of blue on hover */
 }
 
 .my-custom-row {
@@ -320,17 +341,21 @@ export default {
 
 .my-custom-col {
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Add a shadow for depth */
   border-radius: 5px;
-  transition: transform 0.3s; /* Add a transition effect for hovering */
+  transition: transform 0.3s;
+  /* Add a transition effect for hovering */
 }
 
 .my-custom-col:hover {
-  transform: scale(1.05); /* Scale up on hover for a pop effect */
+  transform: scale(1.05);
+  /* Scale up on hover for a pop effect */
 }
 
 .my-custom-card {
-  background-color: #2196F3; /* Blue color */
+  background-color: #2196F3;
+  /* Blue color */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
@@ -362,22 +387,26 @@ export default {
   color: #2196F3;
 }
 
-.v-text-field--outlined .v-input__icon--prepend, .v-text-field--outlined .v-input__icon--append {
+.v-text-field--outlined .v-input__icon--prepend,
+.v-text-field--outlined .v-input__icon--append {
   color: #2196F3;
 }
 
 .v-text-field--outlined .v-input__control--text-field {
   border: 2px solid #2196F3;
   border-radius: 5px;
-  transition: box-shadow 0.3s; /* Add a box-shadow transition */
+  transition: box-shadow 0.3s;
+  /* Add a box-shadow transition */
 }
 
-.v-text-field--outlined .v-input__control--text-field::before, .v-text-field--outlined .v-input__control--text-field::after {
+.v-text-field--outlined .v-input__control--text-field::before,
+.v-text-field--outlined .v-input__control--text-field::after {
   border-color: #2196F3;
 }
 
 .v-text-field--outlined .v-input__control--text-field:focus {
-  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5); /* Highlight on focus */
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+  /* Highlight on focus */
 }
 
 /* Style the button */
@@ -389,7 +418,8 @@ export default {
 }
 
 .v-btn--contained.v-btn--round:hover {
-  background-color: #1976D2; /* Darker shade of blue on hover */
+  background-color: #1976D2;
+  /* Darker shade of blue on hover */
 }
 
 /* Increase the font size for the list titles */
@@ -412,8 +442,7 @@ export default {
 /* Add spacing between list items for better readability */
 .my-custom-list-item {
   margin: 20px 0;
-}
-</style>
+}</style>
 
 
 

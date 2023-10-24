@@ -1,8 +1,8 @@
 <template>
   <v-app id="app">
     <nav class="navigation">
-      <router-link to="/login" class="nav-link">Login</router-link>
-      <router-link to="/register" class="nav-link">Register</router-link>
+      <router-link :to="'/login'" :class="'nav-link customColor'">Login</router-link>
+      <router-link :to="'/register'" :class="'nav-link customColor'">Register</router-link>
     </nav>
     <router-view></router-view>
   </v-app>
@@ -15,7 +15,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 /* Navigation styles */
 .navigation {
   background-color: #3498db;
@@ -36,5 +35,8 @@ body {
 
 .nav-link:hover {
   background-color: #2980b9;
+}
+.customColor {
+  color: #fff;
 }
 </style>
