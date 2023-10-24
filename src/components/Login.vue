@@ -22,7 +22,7 @@
                 required
                 outlined
               ></v-text-field>
-              <v-btn type="submit" color="primary">Login</v-btn>
+              <v-btn type="submit" >Login</v-btn>
             </v-form>
           </v-card-text>
         </v-card>

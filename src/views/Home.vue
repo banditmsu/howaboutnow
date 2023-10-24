@@ -1,63 +1,25 @@
+
+
 <template>
   <v-container class="d-flex align-center justify-center">
     <v-layout>
-      <v-flex v-if="addingGoal" lg12> <!-- Adjust the column width based on your layout preferences -->
+      <v-flex v-if="addingGoal" lg12>
         <v-card class="my-custom-card">
-              <v-card-title class="headline">
-                Tell ME YOUR GOALZ
-              </v-card-title>
-              <v-card-text>
-                <!-- Title input field -->
-                <v-text-field
-                  v-model="title"
-                  label="Title"
-                  outlined
-                  required
-                ></v-text-field>
-
-                <!-- Description input field -->
-                <v-text-field
-                  v-model="description"
-                  label="Description"
-                  outlined
-                  required
-                ></v-text-field>
-
-                <!-- Additional fields -->
-                <v-text-field
-                  v-model="overallProgress"
-                  label="Overall % Complete"
-                  outlined
-                  required
-                ></v-text-field>
-                <v-text-field
-                  v-model="actionsTaken"
-                  label="Actions taken this month"
-                  outlined
-                  required
-                ></v-text-field>
-                <v-text-field
-                  v-model="actionsPlanned"
-                  label="Actions planned next month"
-                  outlined
-                  required
-                ></v-text-field>
-                <v-text-field
-                  v-model="obstacles"
-                  label="Obstacles/Roadblocks"
-                  outlined
-                  required
-                ></v-text-field>
-                <v-text-field
-                  v-model="helpNeeded"
-                  label="Specific help needed"
-                  outlined
-                  required
-                ></v-text-field>
-
-                <!-- Add Button -->
-                <v-btn @click="addDataToFirestore">Add Goal</v-btn>
-
+          <v-card-title class="headline">
+            Tell ME YOUR GOALZ
+          </v-card-title>
+          <v-card-text>
+            <v-form @submit.prevent="addDataToFirestore">
+              <!-- Form fields for adding a new goal -->
+              <v-text-field v-model="title" label="Title" outlined required></v-text-field>
+              <v-text-field v-model="description" label="Description" outlined required></v-text-field>
+              <v-text-field v-model="overallProgress" label="Overall % Complete" outlined required></v-text-field>
+              <v-text-field v-model="actionsTaken" label="Actions taken this month" outlined required></v-text-field>
+              <v-text-field v-model="actionsPlanned" label="Actions planned next month" outlined required></v-text-field>
+              <v-text-field v-model="obstacles" label="Obstacles/Roadblocks" outlined required></v-text-field>
+              <v-text-field v-model="helpNeeded" label="Specific help needed" outlined required></v-text-field>
+              <v-btn type="submit" color="primary">Add Goal</v-btn>
+            </v-form>
           </v-card-text>
         </v-card>
       </v-flex>
@@ -67,87 +29,74 @@
             Goalz List
           </v-card-title>
           <v-card-text class="my-custom-card-text">
-            <!-- Your list of documents here -->
-            <v-list>
-              <v-list-item
-                v-for="(document, index) in documents"
-                :key="index"
-                class="my-custom-list-item"
-              >
-                <v-list-item-title class="my-custom-list-title">
-                  <template v-if="editMode">
-                    <v-text-field
-                      outlined
-                      v-model="document.title"
-                    ></v-text-field>
+            <v-data-table :headers="tableHeaders" :items="documents" item-key="id">
+              <template v-slot:item.title="{ item }">
+                <v-edit-dialog :return-value.sync="item.title">
+                  <template v-slot:input>
+                    <v-text-field v-model="item.title"></v-text-field>
                   </template>
-                  <template v-else>
-                    {{ document.title }}
-                  </template>
-                </v-list-item-title>
-                <v-list-item-subtitle class="my-custom-list-subtitle">
-                  <template v-if="editMode">
-                    <v-text-field
-                      outlined
-                      v-model="document.description"
-                    ></v-text-field>
-                  </template>
-                  <template v-else>
-                    {{ document.description }}
-                  </template>
-                </v-list-item-subtitle>
-                <v-list-item-subtitle class="my-custom-list-subtitle">
-                  <template v-if="editMode">
-                    <v-text-field
-                      outlined
-                      v-model="document.overallProgress"
-                    ></v-text-field>
-                  </template>
-                  <template v-else>
-                    {{ document.overallProgress }}
-                  </template>
-                </v-list-item-subtitle>
-                <v-list-item-subtitle class="my-custom-list-subtitle">
-                  <template v-if="editMode">
-                    <v-text-field
-                      outlined
-                      v-model="document.actionsTaken"
-                    ></v-text-field>
-                  </template>
-                  <template v-else>
-                    {{ document.actionsTaken }}
-                  </template>
-                </v-list-item-subtitle>
-                <v-list-item-subtitle class="my-custom-list-subtitle">
-                  <template v-if="editMode">
-                    <v-text-field
-                      outlined
-                      v-model="document.actionsPlanned"
-                    ></v-text-field>
-                  </template>
-                  <template v-else>
-                    {{ document.actionsPlanned }}
-                  </template>
-                </v-list-item-subtitle>
-                <!-- Add more editable fields here -->
-              </v-list-item>
-            </v-list>
-            <v-btn v-if="editMode" @click="saveChanges">Save</v-btn>
-            <v-btn @click="toggleEditMode">
-              <template v-if="editMode">
-                Exit Edit Mode
+                  {{ item.title }}
+                </v-edit-dialog>
               </template>
-              <template v-else>
-                Edit
+              <template v-slot:item.description="{ item }">
+                <v-edit-dialog :return-value.sync="item.description">
+                  <template v-slot:input>
+                    <v-text-field v-model="item.description"></v-text-field>
+                  </template>
+                  {{ item.description }}
+                </v-edit-dialog>
               </template>
-            </v-btn>
+              <template v-slot:item.overallProgress="{ item }">
+                <v-edit-dialog :return-value.sync="item.overallProgress">
+                  <template v-slot:input>
+                    <v-text-field v-model="item.overallProgress"></v-text-field>
+                  </template>
+                  {{ item.overallProgress }}
+                </v-edit-dialog>
+              </template>
+              <template v-slot:item.actionsPlanned="{ item }">
+                <v-edit-dialog :return-value.sync="item.actionsPlanned">
+                  <template v-slot:input>
+                    <v-text-field v-model="item.actionsPlanned"></v-text-field>
+                  </template>
+                  {{ item.actionsPlanned }}
+                </v-edit-dialog>
+              </template>
+              <template v-slot:item.actionsTaken="{ item }">
+                <v-edit-dialog :return-value.sync="item.actionsTaken">
+                  <template v-slot:input>
+                    <v-text-field v-model="item.actionsTaken"></v-text-field>
+                  </template>
+                  {{ item.actionsTaken }}
+                </v-edit-dialog>
+              </template>
+              <template v-slot:item.obstacles="{ item }">
+                <v-edit-dialog :return-value.sync="item.obstacles">
+                  <template v-slot:input>
+                    <v-text-field v-model="item.obstacles"></v-text-field>
+                  </template>
+                  {{ item.obstacles }}
+                </v-edit-dialog>
+              </template>
+              <template v-slot:item.helpNeeded="{ item }">
+                <v-edit-dialog :return-value.sync="item.helpNeeded">
+                  <template v-slot:input>
+                    <v-text-field v-model="item.helpNeeded"></v-text-field>
+                  </template>
+                  {{ item.helpNeeded }}
+                </v-edit-dialog>
+              </template>
+            </v-data-table>
+            <v-btn @click="saveChanges()">Save</v-btn>
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-btn @click="toggleView()">Toggle View</v-btn>
+      <v-btn @click="toggleView">Toggle View</v-btn>
     </v-layout>
   </v-container>
 </template>
+
+
 
 <script>
 import firestore from '../firebase/firebaseConfig'; // Import the Firestore instance
@@ -166,6 +115,14 @@ export default {
       helpNeeded: '', // New field for Specific help needed
       editMode: false, // Set to true when editing a document
       addingGoal: true, // Set to true when adding a document
+      tableHeaders: [
+      { text: 'Title', value: 'title' },
+      { text: 'Description', value: 'description' },
+      { text: 'Overall Progress', value: 'overallProgress' },
+      { text: 'Actions Taken', value: 'actionsTaken' },
+      { text: 'Actions Planned', value: 'actionsPlanned' },
+      // Add more headers as needed
+    ],
     };
   },
   created() {
@@ -214,56 +171,38 @@ export default {
       }
     },
     saveChanges() {
-    const batch = firestore.batch(); // Create a batch for multiple updates
-
-    this.documents.forEach((document) => {
-      // Reference to the Firestore document
-      const docRef = firestore.collection('Documents').doc(document.id);
-
-      // Create an object with updated fields
-      const updatedData = {};
-
-      if (document.title !== undefined) {
-        updatedData.title = document.title;
+      // Iterate through the documents and save the changes
+      for (const document of this.documents) {
+        // You can use an update function to save the changes to your data source
+        // Replace the following with your specific update logic
+        this.updateDocument(document);
       }
 
-      if (document.description !== undefined) {
-        updatedData.description = document.description;
-      }
-
-      if (document.overallProgress !== undefined) {
-        updatedData.overallProgress = document.overallProgress;
-      }
-
-      if (document.actionsTaken !== undefined) {
-        updatedData.actionsTaken = document.actionsTaken;
-      }
-
-      if (document.actionsPlanned !== undefined) {
-        updatedData.actionsPlanned = document.actionsPlanned;
-      }
-
-      // Add other fields as needed
-
-      batch.update(docRef, updatedData); // Queue the update in the batch
-    });
-
-    // Commit the batch to update all documents at once
-    batch.commit()
-      .then(() => {
-        this.editMode = false; // Exit edit mode
-        console.log('Changes saved successfully');
-      })
-      .catch((error) => {
-        console.error('Error saving changes:', error);
+      // Exit edit mode after saving changes
+      this.editMode = false;
+    },
+    updateDocument(document) {
+      // Implement your logic to update the document in your data source (e.g., Firestore)
+      // Example: Update the document in Firestore
+      firestore.collection('Documents').doc(document.id).update({
+        title: document.title,
+        description: document.description,
+        overallProgress: document.overallProgress,
+        // Update other fields
+      }).then(() => {
+        console.log('Document updated successfully');
+      }).catch((error) => {
+        console.error('Error updating document:', error);
       });
-  },
+    },
     toggleEditMode() {
       this.editMode = !this.editMode;
     },
 
     toggleView() {
       this.addingGoal = !this.addingGoal;
+
+      this.fetchDocuments();
     },
     async fetchDocuments() {
       try {
@@ -361,16 +300,17 @@ export default {
 }
 
 /* Style the button */
-.v-btn--contained.v-btn--round {
+.v-btn.v-btn--contained.v-btn--round {
   background-color: #2196F3;
   color: #fff;
   border-radius: 30px;
   text-transform: none;
 }
 
-.v-btn--contained.v-btn--round:hover {
+.v-btn.v-btn--contained.v-btn--round:hover {
   background-color: #1976D2; /* Darker shade of blue on hover */
 }
+
 .my-custom-row {
   background-color: #f5f5f5;
   padding: 20px;

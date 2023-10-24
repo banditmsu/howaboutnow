@@ -12,7 +12,10 @@ new Vue({
   render: (h) => h(App),
   router,
   store,
-  Vuetify,
+  vuetify: new Vuetify(),
+  data: {
+    documents: [], 
+  },
 }).$mount('#app');
 
 const opts = {
