@@ -1,9 +1,9 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col cols="12" sm="8" md="6">
-        <v-card>
-          <v-card-title class="headline">
+  <v-container fluid fill-height>
+    <v-layout align-center justify-center>
+      <v-flex xs12 sm8 md6>
+        <v-card elevation="10"> <!-- Apply elevation for a pop effect -->
+          <v-card-title class="headline primary">
             Login
           </v-card-title>
           <v-card-text>
@@ -26,8 +26,8 @@
             </v-form>
           </v-card-text>
         </v-card>
-      </v-col>
-    </v-row>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 

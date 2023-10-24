@@ -1,8 +1,8 @@
 <template>
   <v-container class="d-flex align-center justify-center">
     <v-layout>
-      <v-flex xs12 sm6 md6> <!-- Adjust the column width based on your layout preferences -->
-        <v-card>
+      <v-flex v-if="addingGoal" lg12> <!-- Adjust the column width based on your layout preferences -->
+        <v-card class="my-custom-card">
               <v-card-title class="headline">
                 Tell ME YOUR GOALZ
               </v-card-title>
@@ -61,7 +61,7 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex xs12 sm6 md6>
+      <v-flex v-else-if="!addingGoal" lg12>
         <v-card class="my-custom-card">
           <v-card-title class="headline my-custom-title">
             Goalz List
@@ -144,6 +144,7 @@
           </v-card-text>
         </v-card>
       </v-flex>
+      <v-btn @click="toggleView()">Toggle View</v-btn>
     </v-layout>
   </v-container>
 </template>
@@ -164,6 +165,7 @@ export default {
       obstacles: '', // New field for Obstacles/Roadblocks
       helpNeeded: '', // New field for Specific help needed
       editMode: false, // Set to true when editing a document
+      addingGoal: true, // Set to true when adding a document
     };
   },
   created() {
@@ -260,6 +262,9 @@ export default {
       this.editMode = !this.editMode;
     },
 
+    toggleView() {
+      this.addingGoal = !this.addingGoal;
+    },
     async fetchDocuments() {
       try {
         const querySnapshot = await firestore.collection('Documents').get();
