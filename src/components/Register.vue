@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6">
-        <v-card>
+        <v-card elevation="10">
           <v-card-title class="headline">
             Register
           </v-card-title>

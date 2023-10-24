@@ -295,33 +295,9 @@ export default {
   height: 100px;
 }
 
-/* Style the form fields with blue color */
-.v-text-field--outlined .v-input__control {
-  background-color: #fff;
-}
-
-.v-text-field--outlined .v-label {
-  color: #2196F3;
-}
-
-.v-text-field--outlined .v-input__icon--prepend,
-.v-text-field--outlined .v-input__icon--append {
-  color: #2196F3;
-}
-
-.v-text-field--outlined .v-input__control--text-field {
-  border: 2px solid #2196F3;
-  border-radius: 5px;
-}
-
-.v-text-field--outlined .v-input__control--text-field::before,
-.v-text-field--outlined .v-input__control--text-field::after {
-  border-color: #2196F3;
-}
-
 /* Style the button */
 .v-btn.v-btn--contained.v-btn--round {
-  background-color: #2196F3;
+  background-color: #fff;
   color: #fff;
   border-radius: 30px;
   text-transform: none;
@@ -408,20 +384,6 @@ export default {
   box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
   /* Highlight on focus */
 }
-
-/* Style the button */
-.v-btn--contained.v-btn--round {
-  background-color: #2196F3;
-  color: #fff;
-  border-radius: 30px;
-  text-transform: none;
-}
-
-.v-btn--contained.v-btn--round:hover {
-  background-color: #1976D2;
-  /* Darker shade of blue on hover */
-}
-
 /* Increase the font size for the list titles */
 .my-custom-list-title {
   font-size: 14px;

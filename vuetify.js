@@ -9,7 +9,7 @@ export default new Vuetify({
     theme: {
       themes: {
         light: {
-          customColor: '#fff', // Replace with your custom color value
+          primary: '#fff', // Replace with your custom color value
         },
       },
     },
