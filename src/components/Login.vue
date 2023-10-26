@@ -2,7 +2,7 @@
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md6>
-        <v-card elevation="10"> <!-- Apply elevation for a pop effect -->
+        <v-card elevation="10" class="login-card"> <!-- Apply elevation for a pop effect -->
           <v-card-title class="headline">
             Login
           </v-card-title>
@@ -22,7 +22,7 @@
                 required
                 outlined
               ></v-text-field>
-              <v-btn type="submit" color="primary" >Login</v-btn>
+              <v-btn type="submit" color="primary" class="login-button">Login</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -33,8 +33,17 @@
 
 <script>
   import auth from '@/firebase/auth';
-
+  import { gsap } from 'gsap';
 export default {
+  mounted() {
+    // Use GSAP to animate the login card
+    gsap.from('.login-card', {
+      opacity: 0,
+      y: 50,
+      duration: 0.5,
+      ease: 'power2.inOut',
+    });
+  },
   methods: {
     async login() {
       try {
@@ -50,3 +59,29 @@ export default {
 
 </script>
   
+<style scoped>
+.login-card {
+  animation: slide-up 0.5s ease both;
+}
+
+.login-button {
+  background-color: #3498db;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #2980b9;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+</style>
