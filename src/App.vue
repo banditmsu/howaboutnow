@@ -1,7 +1,8 @@
 <template>
   <v-app id="app">
     <nav class="navigation">
-      <router-link :to="'/login'" :class="'nav-link customColor'">Home</router-link>
+      <router-link :to="'/home'" :class="'nav-link customColor'">Home</router-link>
+      <router-link :to="'/login'" :class="'nav-link customColor'">Login</router-link>
       <router-link :to="'/register'" :class="'nav-link customColor'">Register</router-link>
     </nav>
     <router-view></router-view>
