@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import firestore from '../firebase/firebaseConfig';
 import GoalsForm from '../components/GoalsForm.vue';
 import GoalsList from '../components/GoalsList.vue';

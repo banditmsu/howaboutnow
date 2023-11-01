@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    // Basic Options
+    "target": "es5",                   // Specify ECMAScript target version
+    "module": "commonjs",              // Specify module code generation
+    "lib": ["es6", "dom"],             // List of library files to be included in the compilation
+    "outDir": "./dist",                // Redirect output structure to the directory
+    "rootDir": "./src",                // Specify the root directory of input files
+    "removeComments": true,            // Remove comments from output
+
+    // Strict Type-Checking Options
+    "strict": true,                    // Enable all strict type-checking options
+
+    // Module Resolution Options
+    "moduleResolution": "node",        // Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
+    "baseUrl": "./",                   // Base directory to resolve non-relative module names
+    "paths": {},                       // A series of entries which re-map imports to lookup locations relative to the baseUrl
+
+    // Experimental Options
+    "experimentalDecorators": true,    // Enables experimental support for ES decorators
+    "esModuleInterop": true,           // Enables emission of more interoperable CommonJS modules
+
+    // Advanced Options
+    "skipLibCheck": true,              // Skip type checking of all declaration files (*.d.ts)
+    "forceConsistentCasingInFileNames": true  // Disallow inconsistently-cased references to the same file
+  },
+  "include": [
+    "src/**/*.ts"  // Files to be included in compilation
+  ],
+  "exclude": [
+    "node_modules" // Files to be excluded from compilation
+  ],
+  "references": [
+    // Project references for a composite project
+  ]
+}

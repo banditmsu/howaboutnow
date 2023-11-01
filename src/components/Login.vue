@@ -31,8 +31,8 @@
   </v-container>
 </template>
 
-<script>
-  import auth from '@/firebase/auth';
+<script lang="ts">
+import { getAuth } from 'firebase/auth';
   import { gsap } from 'gsap';
 export default {
   mounted() {
@@ -47,7 +47,7 @@ export default {
   methods: {
     async login() {
       try {
-        await auth.signInWithEmailAndPassword(this.email, this.password);
+        await getAuth.signInWithEmailAndPassword(this.email, this.password);
         alert('Login successful!');
         this.$router.push({ name: 'Home' }); // Redirect to the Home route
       } catch (error) {

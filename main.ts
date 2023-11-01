@@ -1,15 +1,10 @@
 import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import 'vuetify/dist/vuetify.min.css';
+import App from './src/App.vue'
+import router from './src/router/index.ts'
+import store from './src/store/index.ts'
 import { createVuetify } from 'vuetify';
-import GoalsForm from './components/GoalsForm.vue';
-import GoalsList from './components/GoalsList.vue';
-import { VCardTitle, VTextField, VBtn, VCard, VCardText, VForm, VLayout, VCol, VRow } from 'vuetify/components';
-import 'vuetify/dist/vuetify.css';
-import { VDataTable} from 'vuetify/labs/VDataTable'
-import { VSnackbar } from 'vuetify/components';
+import GoalsForm from './src/components/GoalsForm.vue';
+import GoalsList from './src/components/GoalsList.vue';
 
 // Define your Vuetify options here
 const vuetifyOptions = {
@@ -37,17 +32,8 @@ const vuetifyOptions = {
     iconfont: 'mdi',  // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
   },
   components: {
-VCardTitle,
-VTextField,
-VBtn,
-VCard,
-VCardText,
-VForm,
-VLayout,
-VDataTable,
-VCol,
-VRow,
-VSnackbar,
+    GoalsForm,
+    GoalsList
  // ... Other components
   },
   lang: {

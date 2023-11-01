@@ -31,8 +31,8 @@
   </v-container>
 </template>
 
-<script>
-  import auth from '@/firebase/auth';
+<script lang='ts'>
+import { getAuth } from 'firebase/auth';
   
   export default {
     data() {
@@ -44,7 +44,7 @@
     methods: {
       async register() {
         try {
-          await auth.createUserWithEmailAndPassword(this.email, this.password);
+          await getAuth.createUserWithEmailAndPassword(this.email, this.password);
           alert('Registration successful!');
         } catch (error) {
           console.error('Error registering:', error);

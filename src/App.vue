@@ -9,13 +9,13 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+export default( {
   name: 'App',
-}
+});
 </script>
 
-<style>
+<style scoped>
 /* Global styles */
 body {
   font-family: 'Arial', sans-serif;
