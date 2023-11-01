@@ -161,61 +161,35 @@ export default {
 </script>
 
 <style scoped>
-/* Remove the unneeded CSS rules */
-.my-custom-row {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.my-custom-col {
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-}
-
 .my-custom-card {
-  background-color: #2196F3;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
   margin: 20px;
 }
 
-.my-custom-title {
-  font-size: 20px;
-  color: #000;
-}
-
-.my-custom-card-text {
+.my-custom-row, .my-custom-list-item {
+  background-color: #f5f5f5;
   padding: 20px;
 }
 
 .my-custom-list-item {
-  padding: 20px;
-  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.my-custom-list-item:last-child {
+  margin-bottom: 0;
+}
+
+.my-custom-list-item .v-text-field {
+  margin-bottom: 0;
+}
+
+.my-custom-list-item .v-text-field:last-child {
+  margin-bottom: 0;
+}
+
+.my-custom-col {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin: 20px 0;
-  background-color: #f9f9f9;
-}
-
-.my-custom-list-title,
-.my-custom-list-subtitle {
-  font-size: 18px;
-  color: #333;
-  padding-right: 20px;
-  height: 100px;
-}
-
-/* Style the button */
-.v-btn.v-btn--contained.v-btn--round {
-  background-color: #fff;
-  color: #fff;
-  border-radius: 30px;
-  text-transform: none;
-}
-
-.v-btn.v-btn--contained.v-btn--round:hover {
-  background-color: #1976D2;
+  transition: transform 0.3s;
 }
 </style>
