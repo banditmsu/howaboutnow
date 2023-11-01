@@ -10,7 +10,6 @@ import { VCardTitle, VTextField, VBtn, VCard, VCardText, VForm, VLayout, VCol, V
 import 'vuetify/dist/vuetify.css';
 import { VDataTable} from 'vuetify/labs/VDataTable'
 import { VSnackbar } from 'vuetify/components';
-import * as Vue from 'vue'
 
 // Define your Vuetify options here
 const vuetifyOptions = {

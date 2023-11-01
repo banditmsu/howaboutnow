@@ -23,7 +23,7 @@
           <!-- Toggle View Button -->
     <v-layout row wrap>
       <v-flex lg12>
-        <v-btn @click="GoToGoalList">GO to Goal List</v-btn>
+        <v-btn @click="goToGoalList">GO to Goal List</v-btn>
       </v-flex>
     </v-layout>
     </div>
@@ -134,7 +134,7 @@ export default {
         toggleEditMode() {
             this.editMode = !this.editMode;
         },
-        GoToGoalList() {
+        goToGoalList() {
           this.$router.push({ name: 'GoalsList' }); // Redirect to the Goals List route
 
             this.fetchDocuments();

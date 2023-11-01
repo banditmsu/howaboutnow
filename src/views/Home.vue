@@ -30,10 +30,6 @@ export default {
     GoalsList,
   },
   methods: {
-    toggleView() {
-      this.addingGoal = !this.addingGoal;
-      this.fetchDocuments();
-    },
     async fetchDocuments() {
       try {
         const querySnapshot = await firestore.collection('Documents').get();
