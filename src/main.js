@@ -5,6 +5,11 @@ import router from './router';
 import store from './store';
 import "vuetify/dist/vuetify.min.css"; // Add this line
 import Vuetify from 'vuetify';
+import GoalsForm from './components/GoalsForm.vue'; 
+import GoalsList from './components/GoalsList.vue';
+
+Vue.component('GoalsForm', GoalsForm);
+Vue.component('GoalsList', GoalsList);
 
 Vue.use(Vuetify);
 
