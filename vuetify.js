@@ -1,11 +1,11 @@
 // src/plugins/vuetify.js
 
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+import vue from 'vue'
+import vuetify from 'vuetify/lib'
 
-Vue.use(Vuetify)
+vue.use(vuetify)
 
-export default new Vuetify({
+export default new vuetify({
     theme: {
       themes: {
         light: {

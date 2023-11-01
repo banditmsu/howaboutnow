@@ -25,6 +25,10 @@ export default {
       ],
     };
   },
+  components: {
+    GoalsForm,
+    GoalsList,
+  },
   methods: {
     toggleView() {
       this.addingGoal = !this.addingGoal;

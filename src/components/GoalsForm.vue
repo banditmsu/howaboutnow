@@ -1,8 +1,5 @@
 <template>
     <div> <!-- This is the single root element -->
-      <div>
-        <h2>Goals Form</h2>
-      </div>
       <v-flex lg12>
         <v-card class="my-custom-card">
           <v-card-title class="headline">
@@ -138,7 +135,7 @@ export default {
             this.editMode = !this.editMode;
         },
         GoToGoalList() {
-          this.$router.push({ name: 'goals-list' }); // Redirect to the Goals List route
+          this.$router.push({ name: 'GoalsList' }); // Redirect to the Goals List route
 
             this.fetchDocuments();
         },

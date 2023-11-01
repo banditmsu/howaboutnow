@@ -19,7 +19,7 @@
           </v-card-title>
     <v-card-text class="my-custom-card-text">
       <v-data-table :headers="tableHeaders" :items="documents" item-key="id">
-        <template v-slot:item.title="{ item }">
+        <template v-slot:title="{ item }">
           <v-edit-dialog :return-value.sync="item.title">
             <template v-slot:input>
               <v-text-field v-model="item.title"></v-text-field>
@@ -27,7 +27,7 @@
             {{ item.title }}
           </v-edit-dialog>
         </template>
-        <template v-slot:item.description="{ item }">
+        <template v-slot:description="{ item }">
           <v-edit-dialog :return-value.sync="item.description">
             <template v-slot:input>
               <v-text-field v-model="item.description"></v-text-field>
@@ -35,7 +35,7 @@
             {{ item.description }}
           </v-edit-dialog>
         </template>
-        <template v-slot:item.overallProgress="{ item }">
+        <template v-slot:overallProgress="{ item }">
           <v-edit-dialog :return-value.sync="item.overallProgress">
             <template v-slot:input>
               <v-text-field v-model="item.overallProgress"></v-text-field>
@@ -43,7 +43,7 @@
             {{ item.overallProgress }}
           </v-edit-dialog>
         </template>
-        <template v-slot:item.actionsPlanned="{ item }">
+        <template v-slot:actionsPlanned="{ item }">
           <v-edit-dialog :return-value.sync="item.actionsPlanned">
             <template v-slot:input>
               <v-text-field v-model="item.actionsPlanned"></v-text-field>
@@ -51,7 +51,7 @@
             {{ item.actionsPlanned }}
           </v-edit-dialog>
         </template>
-        <template v-slot:item.actionsTaken="{ item }">
+        <template v-slot:actionsTaken="{ item }">
           <v-edit-dialog :return-value.sync="item.actionsTaken">
             <template v-slot:input>
               <v-text-field v-model="item.actionsTaken"></v-text-field>
@@ -59,7 +59,7 @@
             {{ item.actionsTaken }}
           </v-edit-dialog>
         </template>
-        <template v-slot:item.obstacles="{ item }">
+        <template v-slot:obstacles="{ item }">
           <v-edit-dialog :return-value.sync="item.obstacles">
             <template v-slot:input>
               <v-text-field v-model="item.obstacles"></v-text-field>
@@ -67,7 +67,7 @@
             {{ item.obstacles }}
           </v-edit-dialog>
         </template>
-        <template v-slot:item.helpNeeded="{ item }">
+        <template v-slot:helpNeeded="{ item }">
           <v-edit-dialog :return-value.sync="item.helpNeeded">
             <template v-slot:input>
               <v-text-field v-model="item.helpNeeded"></v-text-field>
@@ -156,7 +156,7 @@ Changes saved
 
     GoToGoalPage() {
       this.addingGoal = !this.addingGoal;
-      this.$router.push({ name: 'goals-form' }); // Redirect to the Home route
+      this.$router.push({ name: 'GoalsForm' }); // Redirect to the Home route
 
       this.fetchDocuments();
     },

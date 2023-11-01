@@ -1,12 +1,11 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home.vue'; // Import your Home component
-import Register from '../components/Register.vue'; // Import your Register component
-import Login from '../components/Login.vue'; // Import your Login component
-import GoalsList from  '../components/GoalsList.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import Register from '../components/Register.vue';
+import Login from '../components/Login.vue';
+import GoalsList from '../components/GoalsList.vue';
 import GoalsForm from '../components/GoalsForm.vue';
 
-Vue.use(VueRouter);
+// Removed Vue.use(VueRouter) since it's not needed in Vue 3
 
 const routes = [
   {
@@ -24,12 +23,14 @@ const routes = [
     name: 'Register',
     component: Register,
   },
-  { path: '/goals-form', name: 'goals-form', component: GoalsForm }, // Route to GoalsForm.vue
-  { path: '/goals-list',name: 'goals-list', component: GoalsList }, // Route to GoalsList.vue
+  { path: '/goals-form', name: 'GoalsForm', component: GoalsForm },
+  { path: '/goals-list', name: 'GoalsList', component: GoalsList },
   // Add more routes as needed
 ];
 
-const router = new VueRouter({
+// Using createRouter method and createWebHistory for history mode
+const router = createRouter({
+  history: createWebHistory(),
   routes,
 });
 
